@@ -1,0 +1,17 @@
+Hello world from the other side of earth.
+Comments and complaints http://www.nicknorton.net
+GUI for mouse wheel speed using imwheel in Gnome
+imwheel needs to be installed for this script to work
+sudo apt-get install imwheel
+Pretty much hard wired to only use a mouse with
+left, right and wheel in the middle.
+If you have a mouse with complications or special needs,
+use the command xev to find what your wheel does.
+The bonus part will only be assessed if the mandatory part is
+PERFECT. Perfect means the mandatory part has been integrally done
+and works without malfunctioning. If you have not passed ALL the
+mandatory requirements, your bonus part will not be evaluated at all.
+The bonus part will only be assessed if the mandatory part is
+PERFECT. Perfect means the mandatory part has been integrally done
+and works without malfunctioning. If you have not passed ALL the
+mandatory requirements, your bonus part will not be evaluated at all.
