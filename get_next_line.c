@@ -23,11 +23,14 @@ char *get_next_line(int fd, size_t buffer_size)
     char *line;
     int nbytes_read = 1;
     int newline_index = 0;
+    static int end_of_file = 0;
     if (!temp)
         temp = ft_strdup("");
     // printf("Ma static Ma ZAbi had temp :%s:\n",temp);
     line = ft_strdup("");
     if (fd < 0 || buffer_size <= 0 || read(fd, &temp, 0) < 0)
+        return (NULL);
+    if (end_of_file == 1)
         return (NULL);
     while (nbytes_read != 0)
     {
@@ -47,33 +50,10 @@ char *get_next_line(int fd, size_t buffer_size)
         else
         {
             temp = ft_strdup(buffer);
+            if(nbytes_read == 0 && !is_there_newline(buffer,&newline_index))
+                end_of_file = 1;
             // printf("the temp reserved for next call : \"%s\"\n",temp);
         }
     }
     return (temp);
-}
-
-int main()
-{
-    int fd = open("foo.txt", O_RDONLY);
-    printf("fd : %d\n", fd);
-    // printf("%s\n",get_next_line(fd,9999));
-    printf("%s\n", get_next_line(fd, 100));
-    printf("%s\n", get_next_line(fd, 100));
-    printf("%s\n", get_next_line(fd, 100));
-    printf("%s\n", get_next_line(fd, 100));
-    printf("%s\n", get_next_line(fd, 100));
-    printf("%s\n", get_next_line(fd, 100));
-    printf("%s\n", get_next_line(fd, 100));
-        printf("%s\n", get_next_line(fd, 100));
-        printf("%s\n", get_next_line(fd, 100));
-        printf("%s\n", get_next_line(fd, 100));
-        printf("%s\n", get_next_line(fd, 100));
-        printf("%s\n", get_next_line(fd, 100));
-        printf("%s\n", get_next_line(fd, 100));
-    printf("%s\n", get_next_line(fd, 100));
-    printf("%s\n", get_next_line(fd, 100));
-    printf("%s\n", get_next_line(fd, 100));
-    printf("%s\n", get_next_line(fd, 100));
-    printf("%s\n", get_next_line(fd, 100));
 }
