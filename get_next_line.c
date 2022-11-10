@@ -36,12 +36,35 @@ char *read_file(int fd, char *saved_string)
 
 char *read_line(char *saved_string, int newline_index)
 {
-    return(ft_substr(saved_string, 0, newline_index + 1));
+    char *line;
+    if (saved_string[0] == '\0')
+	    return (NULL);
+    line = ft_substr(saved_string, 0, newline_index + 1);
+    return(line);
 }
 
 char *read_the_rest(char *saved_string, int newline_index)
 {
-    return(ft_substr(saved_string, newline_index + 1, ft_strlen(saved_string) - newline_index));
+    char *str;
+    int i;
+    int j;
+    if (!saved_string)
+        return (NULL);
+    if (saved_string[newline_index] == '\0')
+	{
+		free(saved_string);
+		return (NULL);
+	}
+    str = (char *)malloc(sizeof(char) * (ft_strlen(saved_string) - newline_index)); 
+    if(!str)
+        return (NULL);
+    j = newline_index + 1;
+    i = 0;
+    while (saved_string[j] != '\0')
+        str[i++] = saved_string[j++];
+    str[i] = '\0';
+    free(saved_string);
+    return(str);
 }
 
 char *get_next_line(int fd)
@@ -49,38 +72,49 @@ char *get_next_line(int fd)
     static char *saved_string;
     char *line;
     int newline_index;
-    static int end;
 
     if (fd < 0 || BUFFER_SIZE <= 0)
         return  (NULL);
-    if(end == 1)
-        return (NULL);
     if(!saved_string)
         saved_string = ft_strdup("");
     saved_string = read_file(fd, saved_string);
-    if(is_there_newline(saved_string,&newline_index) && end == 0)
-    {
-        line = read_line(saved_string,newline_index);
-        saved_string = read_the_rest(saved_string,newline_index);
-    }
-    else
-    {
-        line = saved_string;
-        end = 1;
-    }
+    is_there_newline(saved_string,&newline_index);
+    line = read_line(saved_string,newline_index);
+    saved_string = read_the_rest(saved_string,newline_index);
     return (line);
 }
 
-// int main()
-// {
-//     int fd = open("foo.txt", O_RDONLY);
-//     printf("fd : %d\n", fd);
-//     // printf("%s\n",get_next_line(fd,9999));
-//     char *s = get_next_line(fd);
-//     while (s)
-//     {
-//         puts(s);
-//         s = get_next_line(fd);
-//     }
-//     printf("%p\n",get_next_line(fd));
-// }
+int main()
+{
+    int fd = open("foo.txt", O_RDONLY);
+    printf("fd : %d\n", fd);
+    // printf("%s\n",get_next_line(fd,9999));
+    // char *s = get_next_line(fd);
+    // while (s)
+    // {
+    //     puts(s);
+    //     s = get_next_line(fd);
+    // }
+    printf("%s\n",get_next_line(fd));
+    printf("%s\n",get_next_line(fd));
+    printf("%s\n",get_next_line(fd));
+    printf("%s\n",get_next_line(fd));
+    printf("%s\n",get_next_line(fd));
+    printf("%s\n",get_next_line(fd));
+    printf("%s\n",get_next_line(fd));
+    printf("%s\n",get_next_line(fd));
+    printf("%s\n",get_next_line(fd));
+    printf("%s\n",get_next_line(fd));
+    printf("%s\n",get_next_line(fd));
+     printf("%s\n",get_next_line(fd));
+    printf("%s\n",get_next_line(fd));
+    printf("%s\n",get_next_line(fd));
+    printf("%s\n",get_next_line(fd));
+    printf("%s\n",get_next_line(fd));
+    printf("%s\n",get_next_line(fd));
+    printf("%s\n",get_next_line(fd));
+    printf("%s\n",get_next_line(fd));
+    printf("%s\n",get_next_line(fd));
+    printf("%s\n",get_next_line(fd));
+    printf("%s\n",get_next_line(fd));
+}
