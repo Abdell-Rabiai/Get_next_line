@@ -39,6 +39,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	i = 0;
 	if (!s)
 		return (NULL);
+	// if (s[0] == '\0')
+	// 	return (NULL);
 	if (start >= ft_strlen(s))
 		return (ft_strdup(""));
 	if (ft_strlen(s) <= start + len)
@@ -76,5 +78,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		i++;
 	}
 	strjoin[i] = '\0';
+	free((char *)s1);
 	return (strjoin);
 }

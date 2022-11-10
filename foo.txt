@@ -1,4 +1,4 @@
-aHello world from the other side of earth.
+Hello world from the other side of earth.
 Comments and complaints http://www.nicknorton.net
 GUI for mouse wheel speed using imwheel in Gnome
 imwheel needs to be installed for this script to work
