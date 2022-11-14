@@ -6,11 +6,24 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 19:24:56 by arabiai           #+#    #+#             */
-/*   Updated: 2022/11/12 10:58:19 by arabiai          ###   ########.fr       */
+/*   Updated: 2022/11/12 11:17:04 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
+
+char	*ft_strdup(const char *src)
+{
+	char	*copy;
+	size_t	i;
+
+	i = 0;
+	copy = (char *)malloc(ft_strlen((char *)src) * sizeof(char) + 1);
+	if (!copy)
+		return (NULL);
+	ft_strlcpy(copy, (char *)src, ft_strlen((char *)src) + 1);
+	return (copy);
+}
 
 int	is_there_newline(char *str, int *newline)
 {
@@ -88,10 +101,7 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (!saved_string[fd])
-	{
-		saved_string[fd] = (char *)malloc(sizeof(char));
-		saved_string[fd][0] = '\0';
-	}
+		saved_string[fd] = ft_strdup("");
 	saved_string[fd] = read_file(fd, saved_string[fd]);
 	if (!saved_string[fd])
 		return (NULL);
@@ -102,9 +112,9 @@ char	*get_next_line(int fd)
 	}
 	else
 	{
-		line = ft_substr(saved_string[fd], 0, ft_strlen(saved_string[fd]) + 1);
-		saved_string[fd] = read_the_rest(saved_string[fd],
-				ft_strlen(saved_string[fd]));
+		newline_index = ft_strlen(saved_string[fd]);
+		line = ft_substr(saved_string[fd], 0, newline_index + 1);
+		saved_string[fd] = read_the_rest(saved_string[fd], newline_index);
 	}
 	return (line);
 }

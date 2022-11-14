@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 19:26:19 by arabiai           #+#    #+#             */
-/*   Updated: 2022/11/10 19:35:31 by arabiai          ###   ########.fr       */
+/*   Updated: 2022/11/12 11:11:47 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,29 +106,3 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	free((char *)s1);
 	return (strjoin);
 }
-
-// char	*ft_strjoin(char const *s1, char const *s2)
-// {
-// 	char	*strjoin;
-// 	size_t	i;
-
-// 	i = 0;
-// 	if (!s1 || !s2)
-// 		return (NULL);
-// 	strjoin = (char *)malloc(sizeof(char)
-// 			* (ft_strlen(s1) + ft_strlen(s2) + 1));
-// 	if (!strjoin)
-// 		return (NULL);
-// 	while (i < ft_strlen(s1))
-// 	{
-// 		strjoin[i] = s1[i];
-// 		i++;
-// 	}
-// 	while (i < ft_strlen(s1) + ft_strlen(s2))
-// 	{
-// 		strjoin[i] = s2[i - ft_strlen(s1)];
-// 		i++;
-// 	}
-// 	strjoin[i] = '\0';
-// 	return (strjoin);
-// }

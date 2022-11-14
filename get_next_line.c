@@ -6,11 +6,24 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 19:24:56 by arabiai           #+#    #+#             */
-/*   Updated: 2022/11/10 20:54:53 by arabiai          ###   ########.fr       */
+/*   Updated: 2022/11/12 11:16:36 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+char	*ft_strdup(const char *src)
+{
+	char	*copy;
+	size_t	i;
+
+	i = 0;
+	copy = (char *)malloc(ft_strlen((char *)src) * sizeof(char) + 1);
+	if (!copy)
+		return (NULL);
+	ft_strlcpy(copy, (char *)src, ft_strlen((char *)src) + 1);
+	return (copy);
+}
 
 int	is_there_newline(char *str, int *newline)
 {
@@ -88,10 +101,7 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	if (!saved_string)
-	{
-		saved_string = (char *)malloc(sizeof(char));
-		saved_string[0] = '\0';
-	}
+		saved_string = ft_strdup("");
 	saved_string = read_file(fd, saved_string);
 	if (!saved_string)
 		return (NULL);
@@ -102,8 +112,9 @@ char	*get_next_line(int fd)
 	}
 	else
 	{
-		line = ft_substr(saved_string, 0, ft_strlen(saved_string) + 1);
-		saved_string = read_the_rest(saved_string, ft_strlen(saved_string));
+		newline_index = ft_strlen(saved_string);
+		line = ft_substr(saved_string, 0, newline_index + 1);
+		saved_string = read_the_rest(saved_string, newline_index);
 	}
 	return (line);
 }
