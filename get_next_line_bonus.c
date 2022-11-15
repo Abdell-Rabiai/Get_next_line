@@ -6,13 +6,13 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 19:24:56 by arabiai           #+#    #+#             */
-/*   Updated: 2022/11/12 11:17:04 by arabiai          ###   ########.fr       */
+/*   Updated: 2022/11/15 12:12:32 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-char	*ft_strdup(const char *src)
+static char	*ft_strdup(const char *src)
 {
 	char	*copy;
 	size_t	i;
@@ -25,7 +25,7 @@ char	*ft_strdup(const char *src)
 	return (copy);
 }
 
-int	is_there_newline(char *str, int *newline)
+static int	is_there_newline(char *str, int *newline)
 {
 	int	i;
 
@@ -42,7 +42,7 @@ int	is_there_newline(char *str, int *newline)
 	return (0);
 }
 
-char	*read_the_rest(char *saved_string, int newline_index)
+static char	*read_the_rest(char *saved_string, int newline_index)
 {
 	char	*str;
 	int		i;
@@ -68,7 +68,7 @@ char	*read_the_rest(char *saved_string, int newline_index)
 	return (str);
 }
 
-char	*read_file(int fd, char *saved_string)
+static char	*read_file(int fd, char *saved_string)
 {
 	char	*buffer;
 	int		nbytes;
@@ -94,7 +94,7 @@ char	*read_file(int fd, char *saved_string)
 
 char	*get_next_line(int fd)
 {
-	static char	*saved_string[1024];
+	static char	*saved_string[OPEN_MAX];
 	char		*line;
 	int			newline_index;
 
